@@ -1,8 +1,8 @@
 
 
-export const WeeklyCard = () => {
+export const WeeklyCard = ({customClass}) => {
   return (
-    <div className="bg-white shadow-md hover:bg-sky-blue-500 hover:text-white  placeholder: p-4 w-[180px]  rounded-[9999px] py-[50px] flex flex-col items-center gap-4  px-3 transition ease-linear">
+    <div className={`bg-white shadow-md   p-4 w-[180px] py-[30px]  flex flex-col items-center gap-10  px-3 transition ease-linear ` + customClass}>
   <div className="thundery">
 	<div className="thundery__cloud"></div>
 	<div className="thundery__rain"></div>

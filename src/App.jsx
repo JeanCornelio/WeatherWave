@@ -2,6 +2,8 @@ import "./App.css";
 import { Header } from "./ui";
 import { Tab, TodayCard, WeeklyCard } from "./components";
 import { useState } from "react";
+import {  SwiperSlide } from "swiper/react";
+import { SwiperComponent } from "./components/SwiperComponent";
 
 const tabs = [
   {
@@ -31,7 +33,7 @@ function App() {
       <main className=" flex justify-center items-center flex-col gap-5 mb-10">
         <div
           id="hero"
-          className="h-[500px] bg-sky-blue-400 rounded-2xl w-full container flex items-center justify-between px-16"
+          className="h-[450px] bg-sky-blue-400 rounded-2xl w-full container flex items-center justify-between px-10"
         >
           <div className="flex flex-col gap-4 justify-start   w-[400px] ">
             <h1 className="text-5xl font-bold  text-white">Santo Domingo</h1>
@@ -85,10 +87,42 @@ function App() {
             </div>
           </div>
         </div>
-        <Tab customClass="container " tabs={tabs} handleTab={handleTab}>
+        <section id="chart" className="container ">
+          <h1>chart weather</h1>
+        </section>
+        <section id="pronostic_weather" className="container">
+        <Tab tabs={tabs} handleTab={handleTab}>
           {tab === 1 && <TodayCard/>}
-          {tab === 2 && <WeeklyCard/>}
+          {tab === 2 && <WeeklyCard customClass={'rounded-[9999px] hover:bg-sky-blue-500 hover:text-white'}/>}
         </Tab>
+        </section>
+        <section id="recent-weather" className="container grid grid-cols-4 items-center bg-gray-100  p-8 gap-3   ">
+          <div className=" col-span-4 xl:col-span-1  ">
+            <div className="text-sky-blue-600 text-5xl font-bold  ">
+          <h1>Recent Search</h1>
+          <h1>Weather</h1>
+
+            </div>
+          <p className="mt-4 text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum cursus quis.</p>
+          </div>
+      
+          <div className=" flex w-full gap-5 overflow-x-auto  col-span-4 xl:col-span-3">
+          <SwiperComponent>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+            <SwiperSlide><WeeklyCard customClass={'rounded-[40px]'}/></SwiperSlide>
+          </SwiperComponent>
+          </div>
+        </section>
+      
       </main>
     </div>
   );
