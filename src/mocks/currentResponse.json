@@ -1,0 +1,47 @@
+{
+    "location": {
+        "name": "Santo Domingo",
+        "region": "Distrito Nacional",
+        "country": "Dominican Republic",
+        "lat": 18.47,
+        "lon": -69.9,
+        "tz_id": "America/Santo_Domingo",
+        "localtime_epoch": 1723054889,
+        "localtime": "2024-08-07 14:21"
+    },
+    "current": {
+        "last_updated_epoch": 1723054500,
+        "last_updated": "2024-08-07 14:15",
+        "temp_c": 30.5,
+        "temp_f": 86.9,
+        "is_day": 1,
+        "condition": {
+            "text": "Patchy rain nearby",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/176.png",
+            "code": 1063
+        },
+        "wind_mph": 8.5,
+        "wind_kph": 13.7,
+        "wind_degree": 149,
+        "wind_dir": "SSE",
+        "pressure_mb": 1012,
+        "pressure_in": 29.89,
+        "precip_mm": 0.03,
+        "precip_in": 0,
+        "humidity": 66,
+        "cloud": 88,
+        "feelslike_c": 35.4,
+        "feelslike_f": 95.7,
+        "windchill_c": 30.5,
+        "windchill_f": 86.9,
+        "heatindex_c": 35.4,
+        "heatindex_f": 95.7,
+        "dewpoint_c": 23.6,
+        "dewpoint_f": 74.4,
+        "vis_km": 10,
+        "vis_miles": 6,
+        "uv": 7,
+        "gust_mph": 9.8,
+        "gust_kph": 15.7
+    }
+}
