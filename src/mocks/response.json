@@ -1,0 +1,47 @@
+[
+    {
+        "id": 652634,
+        "name": "Santo Domingo",
+        "region": "Distrito Nacional",
+        "country": "Dominican Republic",
+        "lat": 18.47,
+        "lon": -69.9,
+        "url": "santo-domingo-distrito-nacional-dominican-republic"
+    },
+    {
+        "id": 670465,
+        "name": "Santo Domingo",
+        "region": "Pichincha",
+        "country": "Ecuador",
+        "lat": -0.25,
+        "lon": -79.15,
+        "url": "santo-domingo-pichincha-ecuador"
+    },
+    {
+        "id": 537229,
+        "name": "Santo Domingo",
+        "region": "Villa Clara",
+        "country": "Cuba",
+        "lat": 22.59,
+        "lon": -80.24,
+        "url": "santo-domingo-villa-clara-cuba"
+    },
+    {
+        "id": 3217447,
+        "name": "Santo Domingo Tehuantepec",
+        "region": "Oaxaca",
+        "country": "Mexico",
+        "lat": 16.32,
+        "lon": -95.25,
+        "url": "santo-domingo-tehuantepec-oaxaca-mexico"
+    },
+    {
+        "id": 911624,
+        "name": "Santo Domingo Xenacoj",
+        "region": "Sacatepequez",
+        "country": "Guatemala",
+        "lat": 14.68,
+        "lon": -90.7,
+        "url": "santo-domingo-xenacoj-sacatepequez-guatemala"
+    }
+]
