@@ -1,16 +1,17 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { useSearch } from '../hooks/useSearch'
 
 import { Results } from './Results'
 import { useResult } from '../hooks/useResults'
 import { getCurrent } from '../services/current'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
 
 export const SearchBar = () => {
   const form = useRef(null)
 
   const { search, handleSubmit, onSubmit, results } = useSearch()
   const { getLocation, showResults, handleShowResult } = useResult({ form })
-
+  const { updateCurrentData } = useContext(GlobalStateContext)
   const setSelectedResult = (result) => {
     getCurrentLocation(result)
   }
@@ -20,6 +21,7 @@ export const SearchBar = () => {
     const newCurrentData = await getCurrent({ name })
     // Dispatch global State
     console.log(newCurrentData)
+    updateCurrentData(newCurrentData)
   }
 
   return (
