@@ -1,13 +1,20 @@
 export function Results ({
   showResults,
-  getLocation,
   handleShowResult,
   results,
-  setSelectedResult
+  setSelectedResult,
+  setCurrentLocation
 }) {
   const selectResult = (result) => {
-    console.log(result)
+    // console.log(result)
     setSelectedResult(result)
+    handleShowResult(false)
+  }
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setCurrentLocation({ lat: position.coords.latitude, lon: position.coords.longitude })
+    })
     handleShowResult(false)
   }
 

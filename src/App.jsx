@@ -7,9 +7,9 @@ import { GlobalStateContext } from './context/GlobalStateProvider'
 function App () {
   const { state } = useContext(GlobalStateContext)
 
-  console.log(state)
+  // console.log(state)
   return (
-    <div className='bg-sky-blue-300'>
+    <div className='bg-sky-blue-300 '>
      {
       state.current ? <WeatherApp/> : <Location/>
 }

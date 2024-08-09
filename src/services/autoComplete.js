@@ -4,6 +4,7 @@ export const autoCompleteSearch = async ({ search }) => {
     try {
       const res = await fetch(`${API_URL}search.json?key=${API_KEY}&q=${search}`)
       const json = await res.json()
+      console.log(json)
       return json
     } catch (error) {
       throw new Error(error)

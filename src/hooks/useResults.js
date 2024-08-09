@@ -3,13 +3,6 @@ import { useEffect, useState } from 'react'
 export function useResult ({ form }) {
   const [showResults, setShowResults] = useState(false)
 
-  const getLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude, position.coords.longitude)
-    })
-    setShowResults(false)
-  }
-
   useEffect(() => {
     document.addEventListener('mousedown', closeOpenMenus)
 
@@ -29,9 +22,10 @@ export function useResult ({ form }) {
   }
 
   return {
-    getLocation,
+
     closeOpenMenus,
     handleShowResult,
     showResults
+
   }
 }
