@@ -1,34 +1,38 @@
 import { Header } from '../ui'
-import { SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
+import { Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
 import { useContext, useState } from 'react'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperComponent } from '../components/SwiperComponent'
 import { useTab } from '../hooks/useTap'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { dateTransform } from '../helper'
+
 export const WeatherApp = () => {
   const { tab, handleTab, tabs } = useTab()
   const { state } = useContext(GlobalStateContext)
-  const { location, current } = state.current
+  const { location, current, forecast } = state.current
+  const { temp } = state
 
+  console.log(forecast.forecastday)
   return (
-    <div >
+    < >
     <Header />
 
-    <main className=" flex justify-center items-center flex-col gap-5  ">
+    <main className=" flex justify-center items-center flex-col gap-5">
       <div
         id="hero"
-        className="h-[450px]  rounded-2xl w-full container flex items-center justify-between px-10 bg-sky-blue-200"
+        className="  rounded-2xl w-full container flex items-center justify-between p-10  bg-sky-blue-800"
 
       >
         <div className="flex flex-col   w-[500px] ">
-          <span className="text-6xl font-extrabold  text-sky-blue-600 mb-2">{location.name}</span>
-          <div className="  text-sky-blue-500/75 mb-12 text-xl ">
+          <span className="text-5xl font-extrabold  text-white mb-2">{location.name}</span>
+          <div className="  text-white  mb-12 text-xl ">
             <span className='me-1'>{location.region},</span>
             <span>{location.country}</span>
           </div>
-          <div className="flex justify-between text-sky-blue-600 mb-6">
-            <p>{current.last_updated}</p>
-            <p><span className='font-bold'>Update As Of</span> {current.last_updated_epoch}</p>
+          <div className="flex justify-between text-white  mb-6">
+            <p>{ dateTransform({ date: current.last_updated, format: 'dddd DD MMMM YY' })}</p>
+            <p><span className='font-bold'>Update As Of</span> {dateTransform({ date: current.last_updated_epoch, format: 'hh:mm A' })}</p>
           </div>
 
           <div className=" bg-white rounded-2xl grid grid-cols-2 gap-4 text-dark p-8  ">
@@ -58,23 +62,15 @@ export const WeatherApp = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white shadow-md p-4 w-[240px] h-[360px] rounded-3xl flex flex-col items-baseline   px-3">
-          <p className="bg-sky-blue-300 rounded-3xl px-4 py-1 text-white ">
+        <div className="bg-white shadow-md p-4 w-56 h-80 rounded-3xl flex flex-col items-baseline   px-3">
+          <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white ">
             {' '}
             Today
           </p>
-          <div className="partly_cloudy self-center">
-            <div className="partly_cloudy__sun"></div>
-            <div className="partly_cloudy__cloud"></div>
-          </div>
-          <h1 className="text-6xl font-bold text-sky-blue-600 self-center ">
-            {current.temp_c}°C
-            {/* {current.temp_f} */}
+          <Condition condition={current.condition} showTextCondition={true} />
+          <h1 className="text-5xl font-bold text-sky-blue-600 self-center ">
+               {current[`temp_${temp}`]}°<span className='uppercase'>{temp}</span>
           </h1>
-          <div className="flex justify-between self-center text-xl font-bold gap-4 mt-auto text-sky-blue-600">
-            <p>23 c</p>
-            <p>-31 c</p>
-          </div>
         </div>
       </div>
       <section id="chart" className="container ">
@@ -82,7 +78,16 @@ export const WeatherApp = () => {
       </section>
       <section id="pronostic_weather" className="container">
         <Tab tabs={tabs} handleTab={handleTab}>
-          {tab === 1 && <TodayCard />}
+        <div className='grid grid-cols-12 gap-2'>
+        {tab === 1 &&
+
+         forecast.forecastday[0].hour.map((hour) => (
+          <TodayCard key={hour.time_epoch} hour={hour} />
+         ))
+
+         }
+        </div>
+
           {tab === 2 && (
             <WeeklyCard
               customClass={
@@ -94,15 +99,15 @@ export const WeatherApp = () => {
       </section>
       <section
         id="recent-weather"
-        className="  bg-sky-blue-200  w-full   flex justify-center"
+        className="  bg-sky-blue-800  w-full   flex justify-center"
       >
         <div className='container grid grid-cols-4 items-center justify-center py-8 gap-3 '>
         <div className=" col-span-4 xl:col-span-1  ">
-          <div className="text-sky-blue-600 text-2xl font-bold  ">
+          <div className="text-white text-2xl font-bold  ">
             <h1>Recent Search</h1>
             <h1>Weather</h1>
           </div>
-          <p className="mt-4 text">
+          <p className="mt-4 text text-white/50 ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum
             cursus quis.
           </p>
@@ -149,6 +154,6 @@ export const WeatherApp = () => {
 
       </section>
     </main>
-  </div>
+  </>
   )
 }

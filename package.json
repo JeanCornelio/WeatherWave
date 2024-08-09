@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "react": "^18.3.1",
+    "react-date-object": "^2.1.9",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.0",
     "swiper": "^11.1.8"

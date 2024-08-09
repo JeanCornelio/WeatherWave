@@ -3,24 +3,29 @@ import { useSearch } from '../hooks/useSearch'
 
 import { Results } from './Results'
 import { useResult } from '../hooks/useResults'
-import { getCurrent } from '../services/current'
+import { getCurrent, getCurrentLatAndLon } from '../services/current'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
 
 export const SearchBar = () => {
   const form = useRef(null)
-
   const { search, handleSubmit, onSubmit, results } = useSearch()
   const { getLocation, showResults, handleShowResult } = useResult({ form })
   const { updateCurrentData } = useContext(GlobalStateContext)
+
   const setSelectedResult = (result) => {
-    getCurrentLocation(result)
+    getCurrentData(result)
   }
 
-  const getCurrentLocation = async (result) => {
-    const name = result.name
-    const newCurrentData = await getCurrent({ name })
+  const setCurrentLocation = async (currentLocation) => {
+    const newCurrentData = await getCurrentLatAndLon(currentLocation)
     // Dispatch global State
-    console.log(newCurrentData)
+    updateCurrentData(newCurrentData)
+  }
+
+  const getCurrentData = async (result) => {
+    const id = result.id
+    const newCurrentData = await getCurrent({ id })
+    // Dispatch global State
     updateCurrentData(newCurrentData)
   }
 
@@ -57,6 +62,7 @@ export const SearchBar = () => {
           handleShowResult={handleShowResult}
           results={results}
           setSelectedResult={setSelectedResult}
+          setCurrentLocation={setCurrentLocation}
         />
       </div>
     </form>
