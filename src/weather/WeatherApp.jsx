@@ -1,5 +1,5 @@
 import { Header } from '../ui'
-import { Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
+import { ChartLine, Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
 import { useContext, useState } from 'react'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperComponent } from '../components/SwiperComponent'
@@ -7,13 +7,32 @@ import { useTab } from '../hooks/useTap'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
 import { dateTransform } from '../helper'
 
+const initialTabs = [
+  {
+    name: '3-day forecast',
+    id: 1,
+    active: true
+  },
+/*   {
+    name: 'Weekly',
+    id: 2,
+    active: false
+  } */
+]
+
 export const WeatherApp = () => {
-  const { tab, handleTab, tabs } = useTab()
+  const { tab, handleTab, tabs } = useTab({tabs:initialTabs})
   const { state } = useContext(GlobalStateContext)
   const { location, current, forecast } = state.current
   const { temp } = state
+  const [hourData, sethourData] = useState()
 
-  console.log(forecast.forecastday)
+  const handleDayHour = (hour)=>{
+    sethourData(hour)
+
+    console.log(hour)
+  }
+
   return (
     < >
     <Header />
@@ -62,7 +81,7 @@ export const WeatherApp = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white shadow-md p-4 w-56 h-80 rounded-3xl flex flex-col items-baseline   px-3">
+        <div className="bg-white shadow-md p-4 w-56 h-80 rounded-3xl flex flex-col items-baseline gap-4   px-3">
           <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white ">
             {' '}
             Today
@@ -73,16 +92,20 @@ export const WeatherApp = () => {
           </h1>
         </div>
       </div>
-      <section id="chart" className="container ">
-        <h1>chart weather</h1>
+
+      {
+        hourData && <section id="chart" className="container ">
+        <ChartLine hourData={hourData}/>
       </section>
+      }
+      
       <section id="pronostic_weather" className="container">
         <Tab tabs={tabs} handleTab={handleTab}>
-        <div className='grid grid-cols-12 gap-2'>
+        <div className='grid grid-cols-3 gap-3'>
         {tab === 1 &&
 
-         forecast.forecastday[0].hour.map((hour) => (
-          <TodayCard key={hour.time_epoch} hour={hour} />
+         forecast.forecastday.map((day) => (
+          <TodayCard key={day.date_epoch} dayData={day} date={day.date} handleDayHour={handleDayHour}  />
          ))
 
          }

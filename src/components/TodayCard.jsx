@@ -1,36 +1,44 @@
-import { useContext } from 'react'
-import { Condition } from './Condition'
-import { GlobalStateContext } from '../context/GlobalStateProvider'
-import { dateTransform } from '../helper'
+import { useContext } from "react";
+import { Condition } from "./Condition";
+import { GlobalStateContext } from "../context/GlobalStateProvider";
+import { dateTransform } from "../helper";
 
-export const TodayCard = ({ hour }) => {
-  const { state } = useContext(GlobalStateContext)
-  const { temp } = state
+export const TodayCard = ({ dayData, date, handleDayHour }) => {
+  const { state } = useContext(GlobalStateContext);
+  const { temp } = state;
+  const {day, hour} = dayData
 
+  
   return (
-    <div className="bg-white shadow-md hover:bg-sky-blue-500 hover:text-white  placeholder: p-4    rounded-3xl flex flex-col items-center  px-3 transition ease-linear ">
-
-      <Condition condition={hour.condition} />
-     <div className="flex gap-2 items-center">
-        <h1 className="text-3xl font-bold text-sky-blue-900 ">
-          {hour[`temp_${temp}`]}°<span className='uppercase text-xl'>{temp}</span>
-        </h1>
-        <h3 className="text-xl font-bold text-sky-blue-300 self-center">{hour[`temp_${temp}`]}°<span className='uppercase text-xl'>{temp}</span></h3>
-      </div>
-      <div className="flex gap-3">
-        <p>45km/h</p>
-        <p>70%</p>
-        <p>Light rain</p>
-      </div>
-      <div className="flex gap-2 flex-col">
-        <p className="bg-sky-blue-900 rounded-3xl px-4 py-1 text-white text-xs ">
-          {hour.condition.text}
+    <div className="bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-wrap items-start px-8 transition ease-linear cursor-pointer   focus:outline-none hover:ring hover:ring-yellow-400" onClick={() => handleDayHour(hour)}>
+      <div className="flex flex-col items-start gap-4 " >
+        <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white">
+          {dateTransform({ date: date, format: "dddd" })}
         </p>
-        <p className="bg-sky-blue-300 rounded-3xl px-4 py-1 text-white text-xs ">
-          { dateTransform({ date: hour.time, format: 'hh:mm A' })}
-        </p>
+        <Condition condition={day.condition} showTextCondition={true} />
       </div>
-
+      <div className=" flex flex-col gap-4 mx-auto">
+        <div className="flex items-center gap-3">
+          <span className="icon-[circum--temp-high] text-sky-blue-600" />
+          {day[`avgtemp_${temp}`]}°<span className="uppercase ">{temp}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="icon-[mdi--weather-windy] text-sky-blue-600" />
+          <p>Wind {day.maxwind_kph} km/h</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="icon-[bi--moisture] text-sky-blue-600" />
+          <p>Humitidy {day.avghumidity} %</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="icon-[cil--rain] text-sky-blue-600" />
+          <p>Rain {day.totalprecip_in} %</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="icon-[mdi--weather-windy] text-sky-blue-600" />
+          <p>Humitidy {day.avghumidity} %</p>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
