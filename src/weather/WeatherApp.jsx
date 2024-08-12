@@ -1,5 +1,5 @@
 import { Header } from '../ui'
-import { Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
+import { ChartLine, Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
 import { useContext, useState } from 'react'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperComponent } from '../components/SwiperComponent'
@@ -25,8 +25,14 @@ export const WeatherApp = () => {
   const { state } = useContext(GlobalStateContext)
   const { location, current, forecast } = state.current
   const { temp } = state
+  const [hourData, sethourData] = useState()
 
-  console.log(forecast.forecastday)
+  const handleDayHour = (hour)=>{
+    sethourData(hour)
+
+    console.log(hour)
+  }
+
   return (
     < >
     <Header />
@@ -86,16 +92,20 @@ export const WeatherApp = () => {
           </h1>
         </div>
       </div>
-      <section id="chart" className="container ">
-        <h1>chart weather</h1>
+
+      {
+        hourData && <section id="chart" className="container ">
+        <ChartLine hourData={hourData}/>
       </section>
+      }
+      
       <section id="pronostic_weather" className="container">
         <Tab tabs={tabs} handleTab={handleTab}>
         <div className='grid grid-cols-3 gap-3'>
         {tab === 1 &&
 
          forecast.forecastday.map((day) => (
-          <TodayCard key={day.date_epoch} day={day.day} date={day.date} />
+          <TodayCard key={day.date_epoch} dayData={day} date={day.date} handleDayHour={handleDayHour}  />
          ))
 
          }

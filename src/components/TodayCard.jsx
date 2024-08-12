@@ -3,13 +3,15 @@ import { Condition } from "./Condition";
 import { GlobalStateContext } from "../context/GlobalStateProvider";
 import { dateTransform } from "../helper";
 
-export const TodayCard = ({ day, date }) => {
+export const TodayCard = ({ dayData, date, handleDayHour }) => {
   const { state } = useContext(GlobalStateContext);
   const { temp } = state;
+  const {day, hour} = dayData
 
+  
   return (
-    <div className="bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-wrap items-start px-8 transition ease-linear cursor-pointer   focus:outline-none hover:ring hover:ring-yellow-400">
-      <div className="flex flex-col items-start gap-4 ">
+    <div className="bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-wrap items-start px-8 transition ease-linear cursor-pointer   focus:outline-none hover:ring hover:ring-yellow-400" onClick={() => handleDayHour(hour)}>
+      <div className="flex flex-col items-start gap-4 " >
         <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white">
           {dateTransform({ date: date, format: "dddd" })}
         </p>
