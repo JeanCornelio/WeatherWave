@@ -17,8 +17,8 @@ export const Location = () => {
           'linear-gradient(to top, #09203f 0%, #537895 100%)'
       }}
     >
-      <div className="w-[500px] h-[600px]   rounded-lg     z-40">
-        <h1 className="text-center text-white font-bold text-2xl md:text-4xl ">
+      <div className="w-[500px] h-[600px]   rounded-lg z-40">
+        <h1 className="text-center text-white font-bold text-2xl md:text-4xl mb-4">
           WeatherWave
         </h1>
         <SearchBar></SearchBar>

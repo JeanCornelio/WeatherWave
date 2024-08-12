@@ -2,7 +2,7 @@ import { API_URL, API_KEY } from '../global/enviroment'
 export const getCurrent = async ({ id }) => {
   if (id !== null) {
     try {
-      const res = await fetch(`${API_URL}forecast.json?key=${API_KEY}&q=id:${id}&days=1`)
+      const res = await fetch(`${API_URL}forecast.json?key=${API_KEY}&q=id:${id}&days=5`)
       const json = await res.json()
 
       return json
@@ -17,7 +17,7 @@ export const getCurrent = async ({ id }) => {
 export const getCurrentLatAndLon = async ({ lat, lon }) => {
   if (lat !== null || lon !== null) {
     try {
-      const res = await fetch(`${API_URL}forecast.json?key=${API_KEY}&q=${lat},${lon}&days=1`)
+      const res = await fetch(`${API_URL}forecast.json?key=${API_KEY}&q=${lat},${lon}&days=5`)
       const json = await res.json()
 
       return json
