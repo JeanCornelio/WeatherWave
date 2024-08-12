@@ -1,19 +1,20 @@
-import { useContext } from "react";
-import { Condition } from "./Condition";
-import { GlobalStateContext } from "../context/GlobalStateProvider";
-import { dateTransform } from "../helper";
+import { useContext } from 'react'
+import { Condition } from './Condition'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { dateTransform } from '../helper'
 
-export const TodayCard = ({ dayData, date, handleDayHour }) => {
-  const { state } = useContext(GlobalStateContext);
-  const { temp } = state;
-  const {day, hour} = dayData
+export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
+  const { state } = useContext(GlobalStateContext)
+  const { temp } = state
+  const { day, hour, date_epoch: dateEpoch } = dayData
 
-  
+  const currentDate = dateTransform({ date, format: 'dddd' })
+
   return (
-    <div className="bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-wrap items-start px-8 transition ease-linear cursor-pointer   focus:outline-none hover:ring hover:ring-yellow-400" onClick={() => handleDayHour(hour)}>
+    <div className={`${dateEpoch === currentDay ? ' ring ring-yellow-400' : 'ring-transparent'}  bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-wrap items-start px-8 transition ease-linear cursor-pointer focus:outline-none hover:ring hover:ring-yellow-400`} onClick={() => handleDay({ hour, id: dateEpoch, date: currentDate, day })}>
       <div className="flex flex-col items-start gap-4 " >
         <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white">
-          {dateTransform({ date: date, format: "dddd" })}
+          {currentDate}
         </p>
         <Condition condition={day.condition} showTextCondition={true} />
       </div>
@@ -40,5 +41,5 @@ export const TodayCard = ({ dayData, date, handleDayHour }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

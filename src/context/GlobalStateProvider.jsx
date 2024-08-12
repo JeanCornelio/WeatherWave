@@ -9,6 +9,7 @@ export const GlobalStateProvider = ({ children }) => {
 // 3.Create Reducer
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  // 4.Create the actions
   const addData = (dataItem) => {
     dispatch({ type: ACTIONS.ADD_DATA, payload: dataItem })
   }
@@ -21,6 +22,7 @@ export const GlobalStateProvider = ({ children }) => {
     dispatch({ type: ACTIONS.UPDATE_TEMP, payload: newTemp })
   }
 
+  // 5. Return the context with childrens
   return (
     <GlobalStateContext.Provider value={{ state, addData, updateCurrentData, updateTemp }}>
         {children}
