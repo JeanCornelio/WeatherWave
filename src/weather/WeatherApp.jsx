@@ -1,6 +1,6 @@
 import { Header } from '../ui'
 import { ChartLine, Condition, SearchBar, Tab, TodayCard, WeeklyCard } from '../components'
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperComponent } from '../components/SwiperComponent'
 import { useTab } from '../hooks/useTap'
@@ -12,7 +12,7 @@ const initialTabs = [
     name: '3-day forecast',
     id: 1,
     active: true
-  },
+  }
 /*   {
     name: 'Weekly',
     id: 2,
@@ -21,17 +21,23 @@ const initialTabs = [
 ]
 
 export const WeatherApp = () => {
-  const { tab, handleTab, tabs } = useTab({tabs:initialTabs})
+  const { tab, handleTab, tabs } = useTab({ tabs: initialTabs })
   const { state } = useContext(GlobalStateContext)
   const { location, current, forecast } = state.current
   const { temp } = state
-  const [hourData, sethourData] = useState()
+  const [currentDayHourData, setCurrentDayHourData] = useState(null)
+  const [currentDay, setCurrentDay] = useState(null)
 
-  const handleDayHour = (hour)=>{
-    sethourData(hour)
-
-    console.log(hour)
+  const handleDay = (currentDayInfo) => {
+    const { hour, id, date, day } = currentDayInfo
+    setCurrentDayHourData({ hour, date, day })
+    setCurrentDay(id)
   }
+
+  const clearChart = useMemo(() => {
+    setCurrentDayHourData(null)
+    setCurrentDay(null)
+  }, [location])
 
   return (
     < >
@@ -94,18 +100,18 @@ export const WeatherApp = () => {
       </div>
 
       {
-        hourData && <section id="chart" className="container ">
-        <ChartLine hourData={hourData}/>
+        currentDayHourData && <section id="chart" className="container ">
+        <ChartLine currentDayData={currentDayHourData}/>
       </section>
       }
-      
+
       <section id="pronostic_weather" className="container">
         <Tab tabs={tabs} handleTab={handleTab}>
         <div className='grid grid-cols-3 gap-3'>
         {tab === 1 &&
 
          forecast.forecastday.map((day) => (
-          <TodayCard key={day.date_epoch} dayData={day} date={day.date} handleDayHour={handleDayHour}  />
+          <TodayCard key={day.date_epoch} dayData={day} date={day.date} handleDay={handleDay} currentDay={currentDay} />
          ))
 
          }

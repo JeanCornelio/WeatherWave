@@ -1,7 +1,7 @@
 import { Swiper } from 'swiper/react'
 import 'swiper/css'
 import { Autoplay } from 'swiper/modules'
-export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children, dealay = 2500, autoplay = false }) => {
+export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children, dealay = 2500 }) => {
   return (
         <Swiper
 
@@ -9,9 +9,9 @@ export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children
             delay: dealay,
             disableOnInteraction: false
           }}
-     /*      onSlideChange={() => console.log('slide change')}
+       /*    onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)} */
-          modules={autoplay && [Autoplay]}
+          modules={[Autoplay]}
           breakpoints={{
             640: {
               slidesPerView: 3,
