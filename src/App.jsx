@@ -9,7 +9,7 @@ function App () {
 
   // console.log(state)
   return (
-    <div className='bg-sky-blue-300 '>
+    <div className='bg-sky-blue-300 h-screen'>
      {
       state.current ? <WeatherApp/> : <Location/>
 }

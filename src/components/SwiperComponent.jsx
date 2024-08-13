@@ -4,7 +4,9 @@ import { Autoplay } from 'swiper/modules'
 export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children, dealay = 2500 }) => {
   return (
         <Swiper
-
+        slidesPerView={4}
+        spaceBetween={30}
+        centeredSlides={true}
           autoplay={{
             delay: dealay,
             disableOnInteraction: false
@@ -12,7 +14,7 @@ export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children
        /*    onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)} */
           modules={[Autoplay]}
-          breakpoints={{
+       /*    breakpoints={{
             640: {
               slidesPerView: 3,
               spaceBetween: 20
@@ -24,9 +26,9 @@ export const SwiperComponent = ({ spaceBetween = 50, slidesPerView = 3, children
             },
             1280: {
               slidesPerView: 5,
-              spaceBetween: 50
+              spaceBetween: 550
             }
-          }}
+          }} */
         >
         {children}
         </Swiper>
