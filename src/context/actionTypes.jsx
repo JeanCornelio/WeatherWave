@@ -1,5 +1,5 @@
 export const ACTIONS = {
-  ADD_DATA: 'add_data',
+  ADD_RECENT_SEARCH: 'add_recent_search',
   REMOVE_DATA: 'remove_data',
   UPDATE_CURRENT_DATA: 'update_current_data',
   UPDATE_TEMP: 'update_temp'
@@ -13,11 +13,31 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case ACTIONS.ADD_DATA:
-      return {
-        ...state,
-        recentSearch: [...state.data, action.payload]
+    case ACTIONS.ADD_RECENT_SEARCH: {
+      const { recentSearch } = state
+      const location = recentSearch.find(el =>
+        el.name === action.payload.name &&
+        el.lat === action.payload.lat &&
+        el.lon === action.payload.lon
+
+      )
+      console.log('location:', location, 'payload:', action.payload)
+      if (location) {
+        console.log('existe')
+        return {
+          ...state,
+          recentSearch: [...recentSearch]
+        }
+      } else {
+        console.log('No existe')
+
+        return {
+          ...state,
+          recentSearch: [action.payload, ...recentSearch]
+        }
       }
+    }
+
     case ACTIONS.UPDATE_CURRENT_DATA:
       return {
         ...state,

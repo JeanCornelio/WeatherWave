@@ -7,7 +7,6 @@ export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
   const { state } = useContext(GlobalStateContext)
   const { temp } = state
   const { day, hour, date_epoch: dateEpoch } = dayData
-
   const currentDate = dateTransform({ date, format: 'dddd' })
 
   return (

@@ -1,34 +1,18 @@
-import { useContext, useRef } from 'react'
+import { useCallback, useContext, useRef } from 'react'
 import { useSearch } from '../hooks/useSearch'
-
 import { Results } from './Results'
 import { useResult } from '../hooks/useResults'
-import { getCurrent, getCurrentLatAndLon } from '../services/current'
-import { GlobalStateContext } from '../context/GlobalStateProvider'
 
 export const SearchBar = () => {
   const form = useRef(null)
-  const { search, handleSubmit, onSubmit, results } = useSearch()
+  const { search, handleSubmit, onSubmit, results, getCurrentData, setCurrentLocation } = useSearch()
   const { getLocation, showResults, handleShowResult } = useResult({ form })
-  const { updateCurrentData } = useContext(GlobalStateContext)
 
-  const setSelectedResult = (result) => {
+  const setSelectedResult = useCallback((result) => {
     getCurrentData(result)
   }
 
-  const setCurrentLocation = async (currentLocation) => {
-    const newCurrentData = await getCurrentLatAndLon(currentLocation)
-    // Dispatch global State
-    updateCurrentData(newCurrentData)
-  }
-
-  const getCurrentData = async (result) => {
-    const id = result.id
-    const newCurrentData = await getCurrent({ id })
-    // Dispatch global State
-    updateCurrentData(newCurrentData)
-  }
-
+  , [search])
   return (
     <form
       className="flex items-center relative w-full"
