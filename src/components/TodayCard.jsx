@@ -19,7 +19,7 @@ export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
       </div>
       <div className=" flex flex-col gap-4 mx-auto">
         <div className="flex items-center gap-3">
-          <span className="icon-[circum--temp-high] text-sky-blue-600" />
+          <span className="icon-[circum--temp-high] text-sky-blue-600 text-lg" />
           {day[`avgtemp_${temp}`]}°<span className="uppercase ">{temp}</span>
         </div>
         <div className="flex items-center gap-3">

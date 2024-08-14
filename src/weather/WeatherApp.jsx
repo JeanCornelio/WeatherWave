@@ -43,7 +43,6 @@ export const WeatherApp = () => {
   return (
     <>
       <Header />
-
       <main className=" flex justify-center items-center flex-col gap-5 bg-sky-blue-300">
         <div
           id="hero"
@@ -107,7 +106,7 @@ export const WeatherApp = () => {
             </p>
             <Condition condition={current.condition} showTextCondition={true} />
             <h1 className="text-5xl font-bold text-sky-blue-600 self-center ">
-              {current[`temp_${temp}`]}°
+            {current[`temp_${temp}`]}°
               <span className="uppercase">{temp}</span>
             </h1>
           </div>
@@ -155,20 +154,29 @@ export const WeatherApp = () => {
                 <h1>Weather</h1>
               </div>
               <p className="mt-4 text text-white/50 leading-loose">
-              Explore your recent weather lookups and quickly access the most up-to-date information for the locations you've searched.
+                Explore your recent weather lookups and quickly access the most
+                up-to-date information for the locations you've searched.
               </p>
             </div>
-            {recentSearch.length > 0 && (
-              <div className=" flex w-full gap-5 overflow-x-auto  col-span-4 xl:col-span-3">
+           <div className=" flex w-full gap-14 overflow-x-auto  col-span-4 xl:col-span-3">
+              {recentSearch.length < 5 &&
+                recentSearch.map((location) => (
+                  <WeeklyCard key={location.localtime_epoch} {...location} />
+                ))}
+
+              {recentSearch.length >= 5 && (
                 <SwiperComponent>
                   {recentSearch.map((location) => (
-                    <SwiperSlide key={location.condition.code}>
-                      <WeeklyCard {...location} />
+                    <SwiperSlide>
+                      <WeeklyCard
+                        key={location.localtime_epoch}
+                        {...location}
+                      />
                     </SwiperSlide>
                   ))}
                 </SwiperComponent>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </section>
       </main>

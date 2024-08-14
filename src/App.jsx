@@ -7,15 +7,10 @@ import { GlobalStateContext } from './context/GlobalStateProvider'
 function App () {
   const { state } = useContext(GlobalStateContext)
 
-  // console.log(state)
   return (
-    <div className='bg-sky-blue-300 h-screen'>
-     {
-      state.current ? <WeatherApp/> : <Location/>
-}
-
+    <div className="bg-sky-blue-300 h-screen">
+      {state.current ? <WeatherApp /> : <Location />}
     </div>
-
   )
 }
 

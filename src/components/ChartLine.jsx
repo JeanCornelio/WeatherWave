@@ -13,7 +13,7 @@ export const ChartLine = ({ currentDayData }) => {
   const { temp } = state
 
   useEffect(() => {
-    const hourData = hour.map(el => {
+    const hourData = hour.map((el) => {
       return {
         date: el.time,
         value: el[`temp_${temp}`],
@@ -24,9 +24,7 @@ export const ChartLine = ({ currentDayData }) => {
     if (chartRef.current) {
       const root = am5.Root.new(chartRef.current)
 
-      root.setThemes([
-        am5themes_Animated.new(root)
-      ])
+      root.setThemes([am5themes_Animated.new(root)])
 
       const chart = root.container.children.push(
         am5xy.XYChart.new(root, {
@@ -48,9 +46,7 @@ export const ChartLine = ({ currentDayData }) => {
       )
       cursor.lineY.set('visible', false)
 
-      const colorSet = am5.ColorSet.new(root, {
-
-      })
+      const colorSet = am5.ColorSet.new(root, {})
 
       const xRenderer = am5xy.AxisRendererX.new(root, {
         minorGridEnabled: true,
@@ -93,7 +89,6 @@ export const ChartLine = ({ currentDayData }) => {
             pointerOrientation: 'vertical',
             dy: -20,
             labelText: '{valueY}'
-
           })
         })
       )
@@ -129,7 +124,6 @@ export const ChartLine = ({ currentDayData }) => {
         a++
 
         container.children.push(
-
           am5.Picture.new(root, {
             centerX: am5.p50,
             centerY: am5.p50,
@@ -138,7 +132,6 @@ export const ChartLine = ({ currentDayData }) => {
             src: hourData[a].icon,
             colorSet
           })
-
         )
 
         return am5.Bullet.new(root, {
@@ -158,13 +151,13 @@ export const ChartLine = ({ currentDayData }) => {
   }, [currentDayData, temp])
 
   return (
-    <div className='bg-white p-4 rounded-2xl flex flex-col items-center gap-1'>
-    {/*   <div className='bg-red-400'>
-
-      <Condition condition={day.condition} showTextCondition={true} />
-      </div> */}
-      <div className='text-sky-blue-400 font-bold text-2xl mb-4'>{date}</div>
-      <div id="chartdiv" style={{ height: '250px', width: '100%' }} ref={chartRef}></div>
+    <div className="bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
+      <div className="text-sky-blue-400 font-bold text-2xl mb-4">{date}</div>
+      <div
+        id="chartdiv"
+        style={{ height: '250px', width: '100%' }}
+        ref={chartRef}
+      ></div>
     </div>
   )
 }

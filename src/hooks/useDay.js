@@ -24,6 +24,13 @@ export const useDay = () => {
   }, [location])
 
   return {
-    handleDay, current, forecast, temp, currentDayHourData, currentDay, location, recentSearch
+    handleDay,
+    current,
+    forecast,
+    temp,
+    currentDayHourData,
+    currentDay,
+    location,
+    recentSearch
   }
 }

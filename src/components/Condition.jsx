@@ -21,15 +21,44 @@ export const Animation = ({ code }) => {
 
     case 1003:
       return <div className="cloudy"></div>
+    case 1009:
+      return (
+        <div className="rainy    relative ">
+          <div className="rainy__cloud absolute left-5"></div>
+          <div className="rainy__cloud absolute -left-5"></div>
+        </div>
+      )
 
     case 1030:
       return <div className="cloudy"></div>
+    case 1135:
+      return (
+        <div className="rainy    relative ">
+          <div className="cloudy absolute left-5"></div>
+          <div className="cloudy absolute -left-5"></div>
+        </div>
+      )
+    case 1150:
+      return (
+        <div className="rainy">
+          <div className="rainy__cloud"></div>
+          <div className="rainy__rain"></div>
+        </div>
+      )
     case 1063:
       return (
         <div className="rainy">
           <div className="rainy__cloud"></div>
         </div>
       )
+    case 1183:
+      return (
+        <div className="rainy">
+          <div className="rainy__cloud"></div>
+          <div className="rainy__rain"></div>
+        </div>
+      )
+
     case 1189:
       return (
         <div className="rainy">
@@ -55,6 +84,13 @@ export const Animation = ({ code }) => {
       return (
         <div className="rainy">
           <div className="rainy__cloud"></div>
+          <div className="rainy__rain"></div>
+        </div>
+      )
+    case 1276:
+      return (
+        <div className="rainy">
+          <div className="thundery__cloud"></div>
           <div className="rainy__rain"></div>
         </div>
       )

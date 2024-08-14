@@ -6,9 +6,9 @@ export function useResult ({ form }) {
   useEffect(() => {
     document.addEventListener('mousedown', closeOpenMenus)
 
-    /*  return () => {
-            document.removeEventListener('mousedown', closeOpenMenus)
-          } */
+    return () => {
+      document.removeEventListener('mousedown', closeOpenMenus)
+    }
   }, [showResults])
 
   const closeOpenMenus = (e) => {
@@ -22,10 +22,8 @@ export function useResult ({ form }) {
   }
 
   return {
-
     closeOpenMenus,
     handleShowResult,
     showResults
-
   }
 }
