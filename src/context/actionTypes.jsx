@@ -15,26 +15,22 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.ADD_RECENT_SEARCH: {
       const { recentSearch } = state
-      const location = recentSearch.find(el =>
-        el.name === action.payload.name &&
-        el.lat === action.payload.lat &&
-        el.lon === action.payload.lon
 
+      // Remove the location if it exists
+      const updatedRecentSearches = recentSearch.filter(
+        (el) =>
+          el.location.name !== action.payload.location.name ||
+          el.location.lat !== action.payload.location.lat ||
+          el.location.lon !== action.payload.location.lon
       )
-      console.log('location:', location, 'payload:', action.payload)
-      if (location) {
-        console.log('existe')
-        return {
-          ...state,
-          recentSearch: [...recentSearch]
-        }
-      } else {
-        console.log('No existe')
 
-        return {
-          ...state,
-          recentSearch: [action.payload, ...recentSearch]
-        }
+      updatedRecentSearches.unshift(action.payload)
+
+      const lastOneRecentSearch = updatedRecentSearches.slice(0, 15)
+
+      return {
+        ...state,
+        recentSearch: [...lastOneRecentSearch]
       }
     }
 
@@ -43,6 +39,7 @@ export const reducer = (state, action) => {
         ...state,
         current: action.payload
       }
+
     case ACTIONS.UPDATE_TEMP:
       return {
         ...state,
