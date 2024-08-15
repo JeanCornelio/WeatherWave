@@ -5,10 +5,14 @@ export const ACTIONS = {
   UPDATE_TEMP: 'update_temp'
 }
 
+const recentSearchFromLocalStorage = JSON.parse(localStorage.getItem('recent_search'))
+const tempFromLocalStorage = JSON.parse(localStorage.getItem('temp'))
+const currentFromLocalStorage = JSON.parse(localStorage.getItem('current_day'))
+
 export const initialState = {
-  current: null,
-  temp: 'c', // c: celcius, f: fahrenheit
-  recentSearch: []
+  current: currentFromLocalStorage || null,
+  temp: tempFromLocalStorage || 'c', // c: celcius, f: fahrenheit
+  recentSearch: recentSearchFromLocalStorage || []
 }
 
 export const reducer = (state, action) => {

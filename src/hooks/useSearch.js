@@ -2,24 +2,15 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { autoCompleteSearch } from '../services/autoComplete'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
 import { getCurrent, getCurrentLatAndLon } from '../services/current'
-
-const useLocalStorage = () => {
-  const setNewCurrentData = (newDay) => {
-    localStorage.setItem('currentData', JSON.stringify(newDay))
-  }
-
-  return {
-    setNewCurrentData
-  }
-}
+import { useLocalStorage } from './useLocaleStorage'
 
 export function useSearch () {
   const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
   const { updateCurrentData, addRecentSearch, state } =
     useContext(GlobalStateContext)
-
   const searchData = useRef(null)
+  const { setCurrentDayToLocalStorage } = useLocalStorage()
 
   const handleSubmit = (e) => {
     setSearch(e.target.value)
@@ -50,6 +41,7 @@ export function useSearch () {
     if (searchData.current !== state?.current?.location?.localtime_epoch) {
       updateCurrentData(newCurrentData)
       addRecentSearch(newCurrentData)
+      setCurrentDayToLocalStorage(newCurrentData)
     }
   }
 
@@ -59,6 +51,7 @@ export function useSearch () {
     // Dispatch global State
     updateCurrentData(newCurrentData)
     addRecentSearch(newCurrentData)
+    setCurrentDayToLocalStorage(newCurrentData)
   }
 
   return {

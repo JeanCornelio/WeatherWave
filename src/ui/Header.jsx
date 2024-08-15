@@ -1,18 +1,23 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { SearchBar } from '../components'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { useLocalStorage } from '../hooks/useLocaleStorage'
 
 export const Header = () => {
   const { updateCurrentData, updateTemp, state } = useContext(GlobalStateContext)
   const { temp } = state
   const toggletemp = temp !== 'c' ? 'c' : 'f'
+  const { setTempToLocalStorage, setCurrentDayToLocalStorage } = useLocalStorage()
   const goBack = () => {
     updateCurrentData(null)
+    setCurrentDayToLocalStorage(null)
   }
 
   const handleTemp = () => {
     updateTemp(toggletemp)
+    setTempToLocalStorage(toggletemp)
   }
+
   return (
     <>
       <div className="container flex justify-end items-center  mx-auto py-5 text-gray-700">
