@@ -1,5 +1,6 @@
-import { useContext, useMemo, useRef, useState } from 'react'
+import { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { useLocalStorage } from './useLocaleStorage'
 
 export const useDay = () => {
   const { state } = useContext(GlobalStateContext)
@@ -8,6 +9,11 @@ export const useDay = () => {
   const [currentDayHourData, setCurrentDayHourData] = useState(null)
   const [currentDay, setCurrentDay] = useState(null)
   const dayCardSelected = useRef(null)
+  const { setRecentSearchToLocalStorage } = useLocalStorage()
+
+  useEffect(() => {
+    setRecentSearchToLocalStorage(recentSearch)
+  }, [recentSearch])
 
   const handleDay = (currentDayInfo) => {
     const { hour, id, date, day } = currentDayInfo

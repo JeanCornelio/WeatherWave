@@ -13,6 +13,7 @@ import { SwiperComponent } from '../components/SwiperComponent'
 import { useTab } from '../hooks/useTap'
 import { dateTransform } from '../helper'
 import { useDay } from '../hooks/useDay'
+import { useLocalStorage } from '../hooks/useLocaleStorage'
 
 const initialTabs = [
   {
