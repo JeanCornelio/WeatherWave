@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
 
-export const Night = ({ handleDay }) => {
+export const Night = () => {
+  const {  setDarkMode} = useContext(GlobalStateContext)
   return (
     <>
       <div
-        className=" absolute  top-5 left-8 md:top-8 md:left-10 cursor-pointer"
-        onClick={() => handleDay(true)}
+        className=" absolute  top-4 left-4 md:top-8 md:left-10 cursor-pointer"
+        onClick={() => setDarkMode(false)}
       >
-        <div className="moon w-10 h-10  before:hidden after:hidden md:w-44 md:h-44 md:after:block  md:before:block"></div>
+        <div className="moon w-32 h-32  before:hidden after:hidden md:w-44 md:h-44 md:after:block  md:before:block"></div>
       </div>
       <div className="starts"></div>
       <div className="shooting-star shooting-star-1"></div>

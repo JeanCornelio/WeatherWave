@@ -21,11 +21,17 @@ export const GlobalStateProvider = ({ children }) => {
   const updateTemp = (newTemp) => {
     dispatch({ type: ACTIONS.UPDATE_TEMP, payload: newTemp })
   }
+  const setDarkMode = (value) => {
+    document.documentElement.classList.toggle("dark");
+    document.querySelector("body").classList.toggle("dark:bg-slate-900");
+    state.darkMode ? (localStorage.theme = "light") : (localStorage.theme = "dark");
+    dispatch({ type: ACTIONS.SET_DARK_MODE, payload: value })
+  }
 
   // 5. Return the context with childrens
   return (
     <GlobalStateContext.Provider
-      value={{ state, addRecentSearch, updateCurrentData, updateTemp }}
+      value={{ state, addRecentSearch, updateCurrentData, updateTemp, setDarkMode, }}
     >
       {children}
     </GlobalStateContext.Provider>

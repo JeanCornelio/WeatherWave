@@ -12,17 +12,28 @@ export const SwiperComponent = ({ children, dealay = 2500 }) => {
 
           modules={[Autoplay]}
           breakpoints={{
+            370: {
+              slidesPerView: 1,
+              spaceBetween: 100,
+            
+            },
+
+            470: {
+              slidesPerView: 2,
+              spaceBetween: 50
+            },
+
             640: {
               slidesPerView: 3,
               spaceBetween: 20
             },
 
             768: {
-              slidesPerView: 4,
+              slidesPerView: 3,
               spaceBetween: 40
             },
             1280: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 100
             }
           }}

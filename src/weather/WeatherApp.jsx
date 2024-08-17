@@ -1,8 +1,7 @@
-import { Header } from '../ui'
+import { Header, Footer } from '../ui'
 import {
   ChartLine,
   Condition,
-  Footer,
   SearchBar,
   Tab,
   TodayCard,
@@ -42,22 +41,23 @@ export const WeatherApp = () => {
   } = useDay()
 
   return (
-    <>
+    <div className=' px-5 md:px-0 flex flex-col justify-between  h-screen'>
       <Header />
-      <main className=" flex justify-center items-center flex-col gap-5 bg-sky-blue-300">
-        <div
+      <main className=" flex justify-center items-center flex-col gap-5 ">
+      
+        <section
           id="hero"
-          className="  rounded-2xl w-full container flex items-center justify-between p-10  bg-sky-blue-800"
+          className=" flex flex-col md:flex-row gap-3  md:container md:items-center rounded-2xl w-full justify-between p-10  bg-sky-blue-800 dark:bg-slate-800 "
         >
-          <div className="flex flex-col   w-[500px] ">
-            <span className="text-5xl font-extrabold  text-white mb-2">
+          <div className="flex flex-col   md:w-[500px] ">
+            <span className="text-3xl md:text-5xl font-extrabold  text-white mb-2">
               {location.name}
             </span>
-            <div className="  text-white  mb-12 text-xl ">
+            <div className="  text-white mb-3  md:mb-12 md:text-xl ">
               <span className="me-1">{location.region},</span>
               <span>{location.country}</span>
             </div>
-            <div className="flex justify-between text-white  mb-6">
+            <div className="flex flex-wrap justify-between text-sm md:text-base text-white  mb-6">
               <p>
                 {dateTransform({
                   date: current.last_updated,
@@ -73,45 +73,45 @@ export const WeatherApp = () => {
               </p>
             </div>
 
-            <div className=" bg-white rounded-2xl grid grid-cols-2 gap-4 text-dark p-8  ">
-              <div className="flex gap-4 items-center text-sky-blue-600">
-                <div className="bg-sky-blue-600 flex p-2 text-2xl rounded-md">
-                  <span className="icon-[mdi--weather-windy] text-white" />
+            <div className=" bg-white dark:bg-slate-900  rounded-2xl grid grid-cols-1  sm:grid-cols-2 md:w-full gap-4 text-dark  p-5 md:p-8  dark:text-white text-sky-blue-600 ">
+              <div className="flex  gap-4 items-center ">
+                <div className="bg-sky-blue-600 dark:bg-sky-blue-900 flex p-2 md:text-2xl rounded-md">
+                  <span className="icon-[mdi--weather-windy] text-white " />
                 </div>
-                <p>Wind {current.wind_kph}km/h</p>
+                <p className='text-sm md:text-base'>Wind {current.wind_kph}km/h</p>
               </div>
-              <div className="flex gap-4 items-center text-sky-blue-600">
-                <div className="bg-sky-blue-600 flex p-2 text-2xl rounded-md">
+              <div className="flex gap-4 items-center ">
+                <div className="bg-sky-blue-600 dark:bg-sky-blue-900  flex p-2 md:text-2xl rounded-md">
                   <span className="icon-[bi--moisture] text-white" />
                 </div>
-                <p>Humidity {current.humidity} %</p>
+                <p className='text-sm md:text-base'>Humidity {current.humidity} %</p>
               </div>
-              <div className="flex gap-4 items-center text-sky-blue-600">
-                <div className="bg-sky-blue-600 flex p-2 text-2xl rounded-md">
+              <div className="flex gap-4 items-center ">
+                <div className="bg-sky-blue-600 dark:bg-sky-blue-900  flex p-2 md:text-2xl rounded-md">
                   <span className="icon-[cil--rain] text-white" />
                 </div>
-                <p>Rain {current.precip_mm} %</p>
+                <p className='text-sm md:text-base'>Rain {current.precip_mm} %</p>
               </div>
-              <div className="flex gap-4 items-center text-sky-blue-600">
-                <div className="bg-sky-blue-600 flex p-2 text-2xl rounded-md">
+              <div className="flex gap-4 items-center ">
+                <div className="bg-sky-blue-600 dark:bg-sky-blue-900  flex p-2 md:text-2xl rounded-md">
                   <span className="icon-[bi--clouds] text-white" />
                 </div>
-                <p>Cloud {current.cloud} %</p>
+                <p className='text-sm md:text-base'>Cloud {current.cloud} %</p>
               </div>
             </div>
           </div>
-          <div className="bg-white shadow-md p-4 w-56 h-80 rounded-3xl flex flex-col items-baseline gap-4   px-3">
-            <p className="bg-sky-blue-500 rounded-3xl px-4 py-1 mb-3 text-white ">
+          <div className="bg-white dark:bg-slate-900  shadow-md p-4 md:w-56 h-[21rem] rounded-3xl flex flex-col items-baseline gap-4   px-3">
+            <p className="bg-sky-blue-500 dark:bg-sky-blue-900 rounded-3xl px-4 py-1 mb-3 text-white ">
               {' '}
               Today
             </p>
             <Condition condition={current.condition} showTextCondition={true} />
-            <h1 className="text-5xl font-bold text-sky-blue-600 self-center ">
+            <h1 className="text-5xl font-bold text-sky-blue-600 dark:text-sky-blue-400 self-center ">
             {current[`temp_${temp}`]}°
               <span className="uppercase">{temp}</span>
             </h1>
           </div>
-        </div>
+        </section>
 
         {currentDayHourData && (
           <section id="chart" className="container ">
@@ -119,9 +119,9 @@ export const WeatherApp = () => {
           </section>
         )}
 
-        <section id="pronostic_weather" className="container">
+        <section id="pronostic_weather" className="container  md:px-0">
           <Tab tabs={tabs} handleTab={handleTab}>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {tab === 1 &&
                 forecast.forecastday.map((day) => (
                   <TodayCard
@@ -146,11 +146,11 @@ export const WeatherApp = () => {
 
         <section
           id="recent-weather"
-          className="  bg-sky-blue-800  w-full   flex justify-center"
+          className="  bg-sky-blue-800 dark:bg-slate-800  w-full   flex justify-center p-4 md:p-0 "
         >
-          <div className="container grid grid-cols-4 items-center justify-center py-8 gap-10">
+          <div className="container grid grid-cols-4 items-center justify-center py-3 md:py-8 gap-10">
             <div className=" col-span-4 xl:col-span-1  ">
-              <div className="text-white text-2xl font-bold  ">
+              <div className="text-white text-3xl md:text-4xl font-bold  ">
                 <h1>Recent Search</h1>
                 <h1>Weather</h1>
               </div>
@@ -166,11 +166,11 @@ export const WeatherApp = () => {
                 ))}
 
               {recentSearch.length >= 5 && (
-                <SwiperComponent>
+                <SwiperComponent >
                   {recentSearch.map((location) => (
-                    <SwiperSlide>
+                    <SwiperSlide  key={location.localtime_epoch}>
                       <WeeklyCard
-                        key={location.localtime_epoch}
+                       
                         {...location}
                       />
                     </SwiperSlide>
@@ -182,6 +182,7 @@ export const WeatherApp = () => {
         </section>
       </main>
       <Footer />
-    </>
+    </div>
+    
   )
 }

@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
 
-export const Day = ({ handleDay }) => {
+export const Day = () => {
+
+  const {  setDarkMode} = useContext(GlobalStateContext)
   return (
     <>
       <div
-        className="partly_cloudy   absolute top-3 left-6 cursor-pointer "
-        onClick={() => handleDay(false)}
+        className="partly_cloudy   absolute top-0 left-0 md:top-3 md:left-6 cursor-pointer "
+        onClick={() => setDarkMode(true)}
       >
-        <div className="partly_cloudy__sun w-14 h-14 md:w-52 md:h-52 z-[5]"></div>
+        <div className="partly_cloudy__sun w-40 h-40 md:w-52 md:h-52 z-[5]"></div>
       </div>
 
       <div className="cloud-1 cloud-block ">

@@ -10,7 +10,7 @@ export const ChartLine = ({ currentDayData }) => {
   const chartRef = useRef(null)
   const { date, hour, day } = currentDayData
   const { state } = useContext(GlobalStateContext)
-  const { temp } = state
+  const { temp, darkMode } = state
 
   useEffect(() => {
     const hourData = hour.map((el) => {
@@ -34,7 +34,7 @@ export const ChartLine = ({ currentDayData }) => {
           wheelY: 'zoomX',
           layout: root.verticalLayout,
           pinchZoomX: true,
-          paddingLeft: 0
+          paddingLeft: 0,
         })
       )
 
@@ -55,7 +55,8 @@ export const ChartLine = ({ currentDayData }) => {
       xRenderer.grid.template.set('location', 0.5)
       xRenderer.labels.template.setAll({
         location: 0.5,
-        multiLocation: 0.5
+        multiLocation: 0.5,
+        fill: darkMode && am5.color(0xFFFFFF)
       })
 
       const xAxis = chart.xAxes.push(
@@ -68,13 +69,25 @@ export const ChartLine = ({ currentDayData }) => {
 
       const yRenderer = am5xy.AxisRendererY.new(root, {})
       yRenderer.grid.template.set('forceHidden', true)
+
       yRenderer.labels.template.set('minPosition', 0.05)
+
+     darkMode &&  xRenderer.grid.template.setAll({
+        stroke: am5.color(0xFFFFFF), // Cambia las líneas verticales a blanco
+        strokeOpacity: 0.2, // Opcional: ajusta la opacidad de las líneas
+      });
+      
+      darkMode && 
+      yRenderer.labels.template.setAll({
+        fill: am5.color(0xFFFFFF) // Establece las etiquetas en color blanco
+      });
 
       const yAxis = chart.yAxes.push(
         am5xy.ValueAxis.new(root, {
           maxPrecision: 0,
           extraMin: 0.1,
-          renderer: yRenderer
+          renderer: yRenderer,
+          
         })
       )
 
@@ -86,13 +99,17 @@ export const ChartLine = ({ currentDayData }) => {
           valueXField: 'date',
           maskBullets: false,
           tooltip: am5.Tooltip.new(root, {
+            getFillFromSprite: darkMode? false : true,
             pointerOrientation: 'vertical',
             dy: -20,
-            labelText: '{valueY}'
-          })
+            labelText: '{valueY}',
+            
+          }),
+          stroke: darkMode ? am5.color(0xFFFFFF) : am5.color(0x456BCE)  ,
         })
       )
-
+    
+ 
       series.data.processor = am5.DataProcessor.new(root, {
         dateFormat: 'yyyy-MM-dd HH:mm',
         dateFields: ['date']
@@ -100,7 +117,7 @@ export const ChartLine = ({ currentDayData }) => {
 
       series.strokes.template.setAll({
         strokeDasharray: [3, 3],
-        strokeWidth: 2
+        strokeWidth: 2,
       })
 
       let i = -1
@@ -118,7 +135,7 @@ export const ChartLine = ({ currentDayData }) => {
         })
 
         container.children.push(
-          am5.Circle.new(root, { radius: 20, fill: series.get('fill') })
+          am5.Circle.new(root, { radius: 20, fill: darkMode ?  am5.color(0x244189) :  am5.color(0x456BCE)  })
         )
 
         a++
@@ -127,8 +144,8 @@ export const ChartLine = ({ currentDayData }) => {
           am5.Picture.new(root, {
             centerX: am5.p50,
             centerY: am5.p50,
-            width: 35,
-            height: 35,
+            width: 50,
+            height: 50,
             src: hourData[a].icon,
             colorSet
           })
@@ -148,11 +165,11 @@ export const ChartLine = ({ currentDayData }) => {
         root.dispose()
       }
     }
-  }, [currentDayData, temp])
+  }, [currentDayData, temp, darkMode])
 
   return (
-    <div className="bg-white p-4 rounded-2xl flex flex-col items-center gap-1">
-      <div className="text-sky-blue-400 font-bold text-2xl mb-4">{date}</div>
+    <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl flex flex-col items-center gap-1">
+      <div className="text-sky-blue-400 dark:text-white font-bold text-2xl mb-4">{date}</div>
       <div
         id="chartdiv"
         style={{ height: '250px', width: '100%' }}
