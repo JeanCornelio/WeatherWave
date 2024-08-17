@@ -6,7 +6,7 @@ export const Condition = ({ condition, showTextCondition }) => {
       <Animation code={code} />
 
       {showTextCondition && (
-        <p className="text-center font-semibold text-sky-blue-700 text-md">
+        <p className="text-center font-semibold text-sky-blue-700 dark:text-white ">
           {text}
         </p>
       )}
@@ -49,6 +49,13 @@ export const Animation = ({ code }) => {
       return (
         <div className="rainy">
           <div className="rainy__cloud"></div>
+        </div>
+      )
+    case 1180:
+      return (
+        <div className="rainy">
+          <div className="rainy__cloud"></div>
+          <div className="rainy__rain"></div>
         </div>
       )
     case 1183:

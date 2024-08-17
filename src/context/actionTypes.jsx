@@ -2,17 +2,23 @@ export const ACTIONS = {
   ADD_RECENT_SEARCH: 'add_recent_search',
   REMOVE_DATA: 'remove_data',
   UPDATE_CURRENT_DATA: 'update_current_data',
-  UPDATE_TEMP: 'update_temp'
+  UPDATE_TEMP: 'update_temp',
+  SET_DARK_MODE: 'set_dark_mode'
 }
 
 const recentSearchFromLocalStorage = JSON.parse(localStorage.getItem('recent_search'))
 const tempFromLocalStorage = JSON.parse(localStorage.getItem('temp'))
 const currentFromLocalStorage = JSON.parse(localStorage.getItem('current_day'))
+const theme =
+  localStorage.theme === "dark" ||
+  (!("theme" in localStorage) &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches);
 
 export const initialState = {
   current: currentFromLocalStorage || null,
   temp: tempFromLocalStorage || 'c', // c: celcius, f: fahrenheit
-  recentSearch: recentSearchFromLocalStorage || []
+  recentSearch: recentSearchFromLocalStorage || [],
+  darkMode: theme
 }
 
 export const reducer = (state, action) => {
@@ -48,6 +54,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         temp: action.payload
+      }
+    case ACTIONS.SET_DARK_MODE:
+      return {
+        ...state,
+        darkMode: action.payload
       }
 
     default:
