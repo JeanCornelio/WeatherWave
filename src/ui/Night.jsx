@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
-import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { useContext } from "react";
+import { GlobalStateContext } from "../context/GlobalStateProvider";
 
 export const Night = () => {
-  const {  setDarkMode} = useContext(GlobalStateContext)
+  const { setDarkMode } = useContext(GlobalStateContext);
   return (
     <>
       <div
@@ -15,5 +15,5 @@ export const Night = () => {
       <div className="shooting-star shooting-star-1"></div>
       <div className="shooting-star shooting-star-2"></div>
     </>
-  )
-}
+  );
+};

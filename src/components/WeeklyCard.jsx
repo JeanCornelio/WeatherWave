@@ -18,14 +18,13 @@ export const WeeklyCard = (props) => {
     >
       <Condition condition={current.condition} />
       <div className="flex flex-col gap-2">
-      <p className="text-sm text-center font-semibold text-sky-blue-600 dark:text-white uppercase ">
-        {location.name}
-      </p>
-      <p className="text-sm text-center font-semibold text-gray-500 ">
-        {location.country}
-      </p>
+        <p className="text-sm text-center font-semibold text-sky-blue-600 dark:text-white uppercase ">
+          {location.name}
+        </p>
+        <p className="text-sm text-center font-semibold text-gray-500 ">
+          {location.country}
+        </p>
       </div>
-     
 
       <h1 className="text-4xl font-extrabold text-sky-blue-600 dark:text-sky-blue-400">
         {" "}

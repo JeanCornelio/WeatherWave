@@ -1,4 +1,4 @@
-export * from './Header'
+export * from './Nav'
 export * from './Day'
 export * from './Night'
 export * from './Footer'

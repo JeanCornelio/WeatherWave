@@ -1,27 +1,27 @@
-import { useCallback, useRef } from 'react'
-import { useSearch } from '../hooks/useSearch'
-import { Results } from './Results'
-import { useResult } from '../hooks/useResults'
+import { useCallback, useRef } from "react";
+import { useSearch } from "../hooks/useSearch";
+import { Results } from "./Results";
+import { useResult } from "../hooks/useResults";
 
 export const SearchBar = () => {
-  const form = useRef(null)
+  const form = useRef(null);
   const {
     search,
     handleSubmit,
     onSubmit,
     results,
     getCurrentData,
-    setCurrentLocation
-  } = useSearch()
-  const { getLocation, showResults, handleShowResult } = useResult({ form })
+    setCurrentLocation,
+  } = useSearch();
+  const { getLocation, showResults, handleShowResult } = useResult({ form });
 
   const setSelectedResult = useCallback(
     (result) => {
-      getCurrentData(result)
+      getCurrentData(result);
     },
 
     [search]
-  )
+  );
   return (
     <form
       className="flex items-center relative w-full"
@@ -59,5 +59,5 @@ export const SearchBar = () => {
         />
       </div>
     </form>
-  )
-}
+  );
+};

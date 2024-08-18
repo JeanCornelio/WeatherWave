@@ -1,19 +1,17 @@
-import { useContext, useState } from 'react'
-import { SearchBar } from '../components'
-import { Day, Night } from '../ui'
-import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { useContext } from "react";
+import { SearchBar } from "../components";
+import { Day, Night } from "../ui";
+import { GlobalStateContext } from "../context/GlobalStateProvider";
 
 export const Location = () => {
- 
-  const {  state} = useContext(GlobalStateContext)
-  console.log( state.darkMode)
+  const { state } = useContext(GlobalStateContext);
+
   return (
     <section
       className="flex justify-center items-center h-screen relative transition px-5 md:px-0"
       style={{
-        backgroundImage: state.darkMode &&
-
-          'linear-gradient(to top, #09203f 0%, #537895 100%)'
+        backgroundImage:
+          state.darkMode && "linear-gradient(to top, #09203f 0%, #537895 100%)",
       }}
     >
       <div className="w-[500px] h-[600px]   rounded-lg z-40">
@@ -24,13 +22,8 @@ export const Location = () => {
       </div>
 
       <div className="cloud-content ">
-        {/*  night */}
-        {
-           state.darkMode ?  <Night />  : <Day /> 
-        }
-
-      
+        x{state.darkMode ? <Night /> : <Day />}
       </div>
     </section>
-  )
-}
+  );
+};
