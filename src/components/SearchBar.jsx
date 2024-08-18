@@ -12,11 +12,13 @@ export const SearchBar = () => {
     results,
     getCurrentData,
     setCurrentLocation,
+    clearSearch
   } = useSearch();
   const { getLocation, showResults, handleShowResult } = useResult({ form });
-
+ 
   const setSelectedResult = useCallback(
     (result) => {
+      clearSearch()
       getCurrentData(result);
     },
 

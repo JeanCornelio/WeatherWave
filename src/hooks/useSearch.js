@@ -5,7 +5,7 @@ import { getCurrent, getCurrentLatAndLon } from '../services/current'
 import { useLocalStorage } from './useLocaleStorage'
 
 export function useSearch () {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('assd')
   const [results, setResults] = useState([])
   const { updateCurrentData, addRecentSearch, state } =
     useContext(GlobalStateContext)
@@ -18,6 +18,11 @@ export function useSearch () {
 
   const onSubmit = (e) => {
     e.preventDefault()
+  }
+
+  const clearSearch = () =>{
+    console.log('ss')
+    setSearch('')
   }
 
   useEffect(() => {
@@ -55,10 +60,12 @@ export function useSearch () {
   }
 
   return {
+    search,
     handleSubmit,
     onSubmit,
     setCurrentLocation,
     getCurrentData,
-    results
+    results,
+    clearSearch
   }
 }
