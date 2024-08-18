@@ -1,3 +1,5 @@
+
+
 export function Results({
   showResults,
   handleShowResult,
@@ -5,9 +7,13 @@ export function Results({
   setSelectedResult,
   setCurrentLocation,
 }) {
+
+
+
   const selectResult = (result) => {
     setSelectedResult(result);
     handleShowResult(false);
+  
   };
 
   const getLocation = () => {
@@ -44,17 +50,17 @@ export function Results({
           {results.length > 0 &&
             results?.map((result) => (
               <li
-                className="py-4 cursor-pointer hover:bg-slate-700"
+                className="py-4 cursor-pointer hover:bg-sky-blue-600 group  hover:text-white   dark:hover:bg-slate-700"
                 onClick={() => selectResult(result)}
                 key={result.id}
               >
                 <div className="flex items-center space-x-4 rtl:space-x-reverse">
                   <div className="flex-shrink-0"></div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <p className="text-sm font-medium   truncate dark:text-white">
                       {result.name}
                     </p>
-                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                    <p className="text-sm text-gray-500 group-hover:text-white truncate dark:text-gray-400">
                       {result.country}
                     </p>
                   </div>

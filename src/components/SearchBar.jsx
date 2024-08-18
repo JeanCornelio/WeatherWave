@@ -12,11 +12,13 @@ export const SearchBar = () => {
     results,
     getCurrentData,
     setCurrentLocation,
+    clearSearch
   } = useSearch();
   const { getLocation, showResults, handleShowResult } = useResult({ form });
-
+ 
   const setSelectedResult = useCallback(
     (result) => {
+      clearSearch()
       getCurrentData(result);
     },
 
@@ -42,7 +44,7 @@ export const SearchBar = () => {
         <input
           type="text"
           className="bg-sky-blue-200   text-sky-blue-800 dark:text-white dark:bg-slate-800 text-sm rounded-lg
-            block w-full ps-10 p-3 focus:outline-none focus:ring focus:ring-sky-blue-400 placeholder:text-sky-blue-400  dark:focus:ring-sky-blue-900 dark:placeholder:text-white"
+            block w-full ps-10 p-3 focus:outline-none focus:ring focus:ring-sky-blue-400 placeholder:text-sky-blue-400  dark:focus:ring-sky-blue-900 dark:placeholder:text-gray-500"
           value={search}
           placeholder="Santo Domingo, Paris, Monte video..."
           onChange={handleSubmit}
