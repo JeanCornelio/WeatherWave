@@ -5,7 +5,7 @@ import { getCurrent, getCurrentLatAndLon } from '../services/current'
 import { useLocalStorage } from './useLocaleStorage'
 
 export function useSearch () {
-  const [search, setSearch] = useState('assd')
+  const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
   const { updateCurrentData, addRecentSearch, state } =
     useContext(GlobalStateContext)
@@ -21,7 +21,6 @@ export function useSearch () {
   }
 
   const clearSearch = () =>{
-    console.log('ss')
     setSearch('')
   }
 
