@@ -1,24 +1,24 @@
-export function Results ({
+export function Results({
   showResults,
   handleShowResult,
   results,
   setSelectedResult,
-  setCurrentLocation
+  setCurrentLocation,
 }) {
   const selectResult = (result) => {
-    setSelectedResult(result)
-    handleShowResult(false)
-  }
+    setSelectedResult(result);
+    handleShowResult(false);
+  };
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation({
         lat: position.coords.latitude,
-        lon: position.coords.longitude
-      })
-    })
-    handleShowResult(false)
-  }
+        lon: position.coords.longitude,
+      });
+    });
+    handleShowResult(false);
+  };
 
   return (
     <>
@@ -64,5 +64,5 @@ export function Results ({
         </ul>
       )}
     </>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 export const Tab = ({ customClass, tabs, children, handleTab }) => {
-  const [activeTab, setActiveTab] = useState(1)
+  const [activeTab, setActiveTab] = useState(1);
 
   const handleActiveTab = (idTab) => {
-    setActiveTab(idTab)
-    handleTab(idTab)
-  }
+    setActiveTab(idTab);
+    handleTab(idTab);
+  };
 
   return (
     <>
@@ -19,8 +19,7 @@ export const Tab = ({ customClass, tabs, children, handleTab }) => {
               <button
                 onClick={() => handleActiveTab(tab.id)}
                 className={`${
-                  tab.id === activeTab &&
-                  '  border-b-4 border-sky-blue-900  '
+                  tab.id === activeTab && "  border-b-4 border-sky-blue-900  "
                 } inline-block p-4 rounded-t-lg text-md pb-2  transition`}
               >
                 {tab.name}
@@ -31,5 +30,5 @@ export const Tab = ({ customClass, tabs, children, handleTab }) => {
         <div className="w-full my-5">{children}</div>
       </div>
     </>
-  )
-}
+  );
+};

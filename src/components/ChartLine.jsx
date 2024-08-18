@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
-import { dateTransform } from '../helper'
-import { Condition } from './Condition'
+
 import { GlobalStateContext } from '../context/GlobalStateProvider'
 
 export const ChartLine = ({ currentDayData }) => {
@@ -37,6 +36,7 @@ export const ChartLine = ({ currentDayData }) => {
           paddingLeft: 0,
         })
       )
+      
 
       const cursor = chart.set(
         'cursor',
@@ -58,12 +58,12 @@ export const ChartLine = ({ currentDayData }) => {
         multiLocation: 0.5,
         fill: darkMode && am5.color(0xFFFFFF)
       })
-
+      
       const xAxis = chart.xAxes.push(
         am5xy.DateAxis.new(root, {
           baseInterval: { timeUnit: 'hour', count: 1 },
           renderer: xRenderer,
-          tooltip: am5.Tooltip.new(root, {})
+          tooltip: am5.Tooltip.new(root, {}),
         })
       )
 
@@ -99,11 +99,14 @@ export const ChartLine = ({ currentDayData }) => {
           valueXField: 'date',
           maskBullets: false,
           tooltip: am5.Tooltip.new(root, {
-            getFillFromSprite: darkMode? false : true,
+            getFillFromSprite: false,
             pointerOrientation: 'vertical',
             dy: -20,
             labelText: '{valueY}',
-            
+            background: am5.Rectangle.new(root, {
+              fill: darkMode ? am5.color(0xFFFFFF)  :  am5.color(0x456BCE),  // Color de fondo del tooltip
+              fillOpacity: 0.8            // Opcional: Opacidad del fondo
+          })
           }),
           stroke: darkMode ? am5.color(0xFFFFFF) : am5.color(0x456BCE)  ,
         })
