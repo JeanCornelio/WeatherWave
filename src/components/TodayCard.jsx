@@ -1,19 +1,19 @@
-import { useContext } from "react";
-import { Condition } from "./Condition";
-import { GlobalStateContext } from "../context/GlobalStateProvider";
-import { dateTransform } from "../helper";
+import { useContext } from 'react'
+import { Condition } from './Condition'
+import { GlobalStateContext } from '../context/GlobalStateProvider'
+import { dateTransform } from '../helper'
 
 export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
-  const { state } = useContext(GlobalStateContext);
-  const { temp } = state;
-  const { day, hour, date_epoch: dateEpoch } = dayData;
-  const currentDate = dateTransform({ date, format: "dddd" });
+  const { state } = useContext(GlobalStateContext)
+  const { temp } = state
+  const { day, hour, date_epoch: dateEpoch } = dayData
+  const currentDate = dateTransform({ date, format: 'dddd' })
 
   return (
     <div
       className={`${
-        dateEpoch === currentDay ? " ring ring-yellow-400" : "ring-transparent"
-      } dark:bg-slate-900 border dark:border-slate-600 bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-col lg:flex-row   gap-4 md:px-8 transition ease-linear cursor-pointer focus:outline-none hover:ring hover:ring-yellow-400`}
+        dateEpoch === currentDay ? ' ring ring-yellow-400' : 'ring-transparent'
+      } dark:bg-slate-900 border dark:border-slate-600 bg-white shadow-md  placeholder: p-4  rounded-3xl flex flex-col xl:flex-row   gap-4 md:px-8 transition ease-linear cursor-pointer focus:outline-none hover:ring hover:ring-yellow-400`}
       onClick={() => handleDay({ hour, id: dateEpoch, date: currentDate, day })}
     >
       <div className="flex flex-col items-start gap-4 w-full md:w-auto">
@@ -22,7 +22,7 @@ export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
         </p>
         <Condition condition={day.condition} showTextCondition={true} />
       </div>
-      <div className=" flex flex-col gap-4 mx-auto my-4 md:mt-0  ">
+      <div className=" grid grid-cols-auto md:grid-cols-1 gap-4 mx-auto my-4 md:mt-0  ">
         <div className="flex items-center gap-3 text-md dark:text-white">
           <span className="icon-[circum--temp-high] text-sky-blue-600 dark:text-sky-blue-400 text-xl" />
           {day[`avgtemp_${temp}`]}°<span className="uppercase  ">{temp}</span>
@@ -45,5 +45,5 @@ export const TodayCard = ({ dayData, date, handleDay, currentDay }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
