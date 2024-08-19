@@ -1,27 +1,27 @@
-import { Nav, Footer } from "../ui";
+import { Nav, Footer } from '../ui'
 import {
   ChartLine,
   Condition,
   Tab,
   TodayCard,
-  WeeklyCard,
-} from "../components";
-import { SwiperSlide } from "swiper/react";
-import { SwiperComponent } from "../components/SwiperComponent";
-import { useTab } from "../hooks/useTap";
-import { dateTransform } from "../helper";
-import { useDay } from "../hooks/useDay";
+  WeeklyCard
+} from '../components'
+import { SwiperSlide } from 'swiper/react'
+import { SwiperComponent } from '../components/SwiperComponent'
+import { useTab } from '../hooks/useTap'
+import { dateTransform } from '../helper'
+import { useDay } from '../hooks/useDay'
 
 const initialTabs = [
   {
-    name: "3-day forecast",
+    name: '3-day forecast',
     id: 1,
-    active: true,
-  },
-];
+    active: true
+  }
+]
 
 export const WeatherApp = () => {
-  const { tab, handleTab, tabs } = useTab({ tabs: initialTabs });
+  const { tab, handleTab, tabs } = useTab({ tabs: initialTabs })
   const {
     handleDay,
     current,
@@ -30,16 +30,17 @@ export const WeatherApp = () => {
     currentDayHourData,
     currentDay,
     location,
-    recentSearch,
-  } = useDay();
+    recentSearch
+  } = useDay()
 
   return (
     <div className=" md:px-0 flex flex-col justify-between  h-screen bg-sky-blue-300 dark:bg-slate-900">
       <Nav />
-      <main className=" flex justify-center items-center flex-col gap-5 px-5 md:px-0">
-        <section
+      <main className=" flex justify-center items-center flex-col gap-5 ">
+        <section className='w-full container px-5'>
+        <div
           id="hero"
-          className=" flex flex-col md:flex-row gap-3  md:container md:items-center rounded-2xl w-full justify-between p-5 md:p-10  bg-sky-blue-800 dark:bg-slate-800 "
+          className="  flex flex-col md:flex-row gap-3   md:items-center rounded-2xl w-full justify-between p-5 md:p-10  bg-sky-blue-800 dark:bg-slate-800 "
         >
           <div className="flex flex-col   md:w-[500px] ">
             <span className="text-3xl md:text-5xl font-extrabold  text-white mb-2">
@@ -53,14 +54,14 @@ export const WeatherApp = () => {
               <p>
                 {dateTransform({
                   date: current.last_updated,
-                  format: "dddd DD MMMM YY",
+                  format: 'dddd DD MMMM YY'
                 })}
               </p>
               <p>
-                <span className="font-bold">Update As Of</span>{" "}
+                <span className="font-bold">Update As Of</span>{' '}
                 {dateTransform({
                   date: current.last_updated_epoch,
-                  format: "hh:mm A",
+                  format: 'hh:mm A'
                 })}
               </p>
             </div>
@@ -100,7 +101,7 @@ export const WeatherApp = () => {
           </div>
           <div className="bg-white dark:bg-slate-900  shadow-md p-4 md:w-56 h-[21rem] rounded-3xl flex flex-col items-baseline gap-4   px-3">
             <p className="bg-sky-blue-500 dark:bg-sky-blue-900 rounded-3xl px-4 py-1 mb-3 text-white ">
-              {" "}
+              {' '}
               Today
             </p>
             <Condition condition={current.condition} showTextCondition={true} />
@@ -109,15 +110,16 @@ export const WeatherApp = () => {
               <span className="uppercase">{temp}</span>
             </h1>
           </div>
+        </div>
         </section>
 
         {currentDayHourData && (
-          <section id="chart" className="container ">
+          <section id="chart" className="container px-5">
             <ChartLine currentDayData={currentDayHourData} />
           </section>
         )}
 
-        <section id="pronostic_weather" className="container  md:px-0">
+        <section id="pronostic_weather" className="container  px-5">
           <Tab tabs={tabs} handleTab={handleTab}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {tab === 1 &&
@@ -135,7 +137,7 @@ export const WeatherApp = () => {
             {tab === 2 && (
               <WeeklyCard
                 customClass={
-                  "rounded-[9999px] hover:bg-sky-blue-500 hover:text-white"
+                  'rounded-[9999px] hover:bg-sky-blue-500 hover:text-white'
                 }
               />
             )}
@@ -144,13 +146,13 @@ export const WeatherApp = () => {
 
         <section
           id="recent-weather"
-          className="  bg-sky-blue-800 dark:bg-slate-800  w-full   flex justify-center p-4 md:p-0 "
+          className="  bg-sky-blue-800 dark:bg-slate-800  w-full   flex justify-center  "
         >
-          <div className="container grid grid-cols-4 items-center justify-center py-3 md:py-8 gap-10">
+          <div className="container grid grid-cols-4 items-center justify-center py-3 px-5 md:py-8 gap-10">
             <div className=" col-span-4 xl:col-span-1  ">
-              <div className="text-white text-3xl md:text-4xl font-bold  ">
-                <h1>Recent Search</h1>
-                <h1>Weather</h1>
+              <div className="text-white text-3xl md:text-5xl font-bold  ">
+                <p>Recent Search</p>
+                <p>Weather</p>
               </div>
               <p className="mt-4 text text-white/50 leading-loose">
                 Explore your recent weather lookups and quickly access the most
@@ -178,5 +180,5 @@ export const WeatherApp = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
