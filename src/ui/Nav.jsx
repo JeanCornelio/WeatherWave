@@ -39,8 +39,8 @@ export const Nav = () => {
             <span
               className={
                 temp === 'c'
-                  ? 'icon-[carbon--temperature-fahrenheit]'
-                  : 'icon-[carbon--temperature-celsius]'
+                  ? 'icon-[carbon--temperature-celsius]'
+                  : 'icon-[carbon--temperature-fahrenheit]'
               }
             />
           </button>
@@ -52,8 +52,8 @@ export const Nav = () => {
             <span
               className={
                 darkMode
-                  ? 'icon-[ps--sun]'
-                  : 'icon-[material-symbols--dark-mode-outline]'
+                  ? 'icon-[material-symbols--dark-mode-outline]'
+                  : 'icon-[ps--sun]'
 
               }
             />
